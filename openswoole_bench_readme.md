@@ -36,6 +36,28 @@
 ## 2. 安装与先决条件
 
 - **PHP 环境**: PHP 8.0 或更高版本。
+- 基于ubuntu部署
+  ```bash
+  sudo apt update
+apt install php8.3
+# 无法通过apt安装swoole组件则需要编译安装
+apt install php-dev php-pear  #按照编译工具
+# 下载源码并编译
+git clone https://github.com/swoole/swoole.git
+cd swoole
+phpize
+./configure
+make
+make install
+# 启用Swoole扩展。编译安装后，你需要手动在php.ini文件中添加Swoole扩展。
+# 找到你的php.ini文件,如：/etc/php/8.3/cli/php.ini
+# 在末尾添加：
+# extension=swoole.so
+# 安装或扩展成功后验证
+php -m | grep swoole #如果命令返回了 swoole，就说明安装成功。
+#安装php-mysql驱动
+apt install php-mysql
+  ```
 - **扩展**: 
     - `openswoole` 或 `swoole` 扩展（版本 >= 4.5）。
     - `pdo_mysql` (当使用 `pdo` 驱动时)。
